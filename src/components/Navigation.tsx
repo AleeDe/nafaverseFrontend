@@ -89,17 +89,17 @@ export const Navigation: React.FC<NavigationProps> = ({
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black md:bg-black/20 md:backdrop-blur-md border-b border-white/10">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 overflow-x-auto md:overflow-visible">
             {/* Logo */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 min-w-0">
               <NafaVerseLogo className="h-8 w-8" />
               <span className="text-xl font-bold text-white">NafaVerse</span>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-8 min-w-0">
               <button
                 onClick={() => handleNavClick('home')}
                 className={`text-sm font-medium transition-colors duration-200 ${
@@ -133,7 +133,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             </div>
 
             {/* Right Side */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 min-w-0">
               <Button
                 onClick={onLanguageToggle}
                 variant="ghost"
@@ -142,7 +142,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               >
                 {t.language}
               </Button>
-              <div className="hidden sm:flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2 min-w-0">
                 <Button
                   onClick={() => setIsLoginOpen(true)}
                   variant="ghost"
@@ -167,7 +167,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="bg-slate-900 border-slate-700">
+                <SheetContent side="right" className="bg-black border-slate-700 w-full max-w-xs">
                   <SheetHeader>
                     <SheetTitle className="text-white">Menu</SheetTitle>
                     <SheetDescription className="text-slate-300">
@@ -216,7 +216,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                         setIsLoginOpen(true);
                         setIsMobileMenuOpen(false);
                       }}
-                      className="bg-gradient-to-r from-[#A78BFA] to-[#60A5FA] text-white mt-4"
+                      className="bg-gradient-to-r from-[#A78BFA] to-[#60A5FA] text-white mt-4 w-full"
                     >
                       {t.signup}
                     </Button>

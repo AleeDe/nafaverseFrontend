@@ -59,7 +59,7 @@ export const Contact: React.FC<ContactProps> = ({ currentLanguage }) => {
   };
 
   return (
-    <div className="pt-16 min-h-screen nv-gradient-dark relative overflow-hidden">
+    <div className="pt-16 min-h-screen nv-gradient-dark relative overflow-hidden px-2 sm:px-0 overflow-x-hidden">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-24 left-24 w-72 h-72 bg-[rgb(var(--nv-secondary))] rounded-full mix-blend-multiply filter blur-2xl animate-pulse"></div>
         <div className="absolute bottom-24 right-24 w-72 h-72 bg-[rgb(var(--nv-accent))] rounded-full mix-blend-multiply filter blur-2xl animate-pulse delay-1000"></div>

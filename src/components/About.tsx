@@ -53,7 +53,7 @@ export const About: React.FC<AboutProps> = ({ currentLanguage, teamMembers }) =>
   const t = content[currentLanguage];
 
   return (
-    <div className="pt-24">
+    <div className="pt-24 px-2 sm:px-0 overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-16">

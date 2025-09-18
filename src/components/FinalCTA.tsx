@@ -24,7 +24,12 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ currentLanguage }) => {
   const t = content[currentLanguage];
 
   return (
-    <section className="py-20 bg-nv-gradient-dark relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-[#1E1B4B] via-[#0F0A2E] to-[#312E81] relative overflow-hidden">
+      <div className="absolute inset-0 opacity-15">
+              <div className="absolute top-20 left-10 w-32 h-32 bg-[#8B5CF6] rounded-full blur-xl"></div>
+              <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#F59E0B] rounded-full blur-xl"></div>
+              <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#8B5CF6]/50 rounded-full blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="mb-8">
           <Sparkles className="w-16 h-16 text-[rgb(var(--nv-accent))] mx-auto animate-pulse" />
