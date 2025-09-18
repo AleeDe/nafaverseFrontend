@@ -167,14 +167,20 @@ export const Navigation: React.FC<NavigationProps> = ({
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="bg-black border-slate-700 w-full max-w-xs">
+                <SheetContent side="right" className="p-0 border-none w-full max-w-xs overflow-x-hidden" >
+                  {/* Gradient/Blob Background */}
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#1E1B4B] via-[#0F0A2E] to-[#312E81] overflow-hidden">
+                    <div className="absolute top-20 left-10 w-32 h-32 bg-[#8B5CF6] rounded-full blur-xl opacity-20"></div>
+                    <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#F59E0B] rounded-full blur-xl opacity-20"></div>
+                    <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#8B5CF6]/50 rounded-full blur-2xl transform -translate-x-1/2 -translate-y-1/2 opacity-20"></div>
+                  </div>
                   <SheetHeader>
                     <SheetTitle className="text-white">Menu</SheetTitle>
                     <SheetDescription className="text-slate-300">
                       Navigate through NafaVerse
                     </SheetDescription>
                   </SheetHeader>
-                  <div className="flex flex-col space-y-4 mt-8">
+                  <div className="flex flex-col space-y-4 mt-8 px-4 overflow-x-hidden">
                     <button
                       onClick={() => {
                         handleNavClick('home');
@@ -211,12 +217,36 @@ export const Navigation: React.FC<NavigationProps> = ({
                     >
                       {t.contact}
                     </button>
+                    {/* Get Started Button */}
                     <Button
                       onClick={() => {
                         setIsLoginOpen(true);
                         setIsMobileMenuOpen(false);
                       }}
-                      className="bg-gradient-to-r from-[#A78BFA] to-[#60A5FA] text-white mt-4 w-full"
+                      className="mt-6 w-full bg-gradient-to-r from-[#A78BFA] to-[#60A5FA] text-white font-bold text-lg py-3 rounded-xl shadow-lg"
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                  {/* Login/Signup at Bottom */}
+                  <div className="absolute bottom-0 left-0 w-full flex flex-col gap-2 px-4 pb-6 bg-gradient-to-t from-black/70 via-transparent to-transparent overflow-x-hidden">
+                    <Button
+                      onClick={() => {
+                        setIsLoginOpen(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      variant="ghost"
+                      className="w-full text-white border border-white/20"
+                    >
+                      {t.login}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setIsLoginOpen(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      variant="glow"
+                      className="w-full text-white"
                     >
                       {t.signup}
                     </Button>
