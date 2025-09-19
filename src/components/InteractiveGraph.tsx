@@ -57,7 +57,12 @@ export const InteractiveGraph: React.FC<InteractiveGraphProps> = ({ currentLangu
   const basePeriods = ['1 Year', '3 Years', '5 Years'] as const;
 
   return (
-    <section className="relative py-16 sm:py-20 nv-gradient-dark">
+    <section className="relative py-16 sm:py-20 bg-gradient-to-br from-[#1E1B4B] via-[#0F0A2E] to-[#312E81]">
+      <div className="absolute inset-0 opacity-15">
+              <div className="absolute top-20 left-10 w-32 h-32 bg-[#8B5CF6] rounded-full blur-xl"></div>
+              <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#F59E0B] rounded-full blur-xl"></div>
+              <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#8B5CF6]/50 rounded-full blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-[color:var(--nv-lightText)] mb-3">
@@ -113,19 +118,19 @@ export const InteractiveGraph: React.FC<InteractiveGraphProps> = ({ currentLangu
             <div className="rounded-xl p-4 sm:p-6 border border-slate-200 bg-slate-50">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[color:var(--nv-lightText)] font-medium">{t.saving}</p>
-                  <p className="text-xl sm:text-2xl font-bold text-slate-600">
+                  <p className="text-slate-500 font-medium">{t.saving}</p>
+                  <p className="text-xl sm:text-2xl font-bold text-red-600">
                     ${data[data.length - 1].saving.toLocaleString()}
                   </p>
                 </div>
-                <TrendingDown className="w-6 h-6 sm:w-8 sm:h-8 text-slate-400" />
+                <TrendingDown className="w-6 h-6 sm:w-8 sm:h-8 text-red-400" />
               </div>
             </div>
             
             <div className="rounded-xl p-4 sm:p-6 border border-emerald-200 bg-emerald-50">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[color:var(--nv-lightText)] font-medium">{t.investing}</p>
+                  <p className="text-slate-500 font-medium">{t.investing}</p>
                   <p className="text-xl sm:text-2xl font-bold text-emerald-600">
                     ${data[data.length - 1].investing.toLocaleString()}
                   </p>

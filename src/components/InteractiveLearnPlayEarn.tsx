@@ -60,7 +60,7 @@ export const InteractiveLearnPlayEarn: React.FC<InteractiveLearnPlayEarnProps> =
           <div className="relative">
             <div className="bg-white rounded-2xl shadow-2xl p-0 border border-gray-200 overflow-hidden">
               {/* Header */}
-              <div className="bg-gradient-to-r from-[#4B3F72] to-[#A786DF] text-white px-6 py-5 flex items-center justify-between">
+              <div className="bg-gradient-to-br from-[#1E1B4B] via-[#0F0A2E] to-[#312E81] text-white px-6 py-5 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">{/* dot */}
                     <span className="w-2 h-2 bg-white rounded-full" />
