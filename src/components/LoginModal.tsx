@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { X, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import axios, { AxiosError } from 'axios';
 import apiService from '../api/apiService';
@@ -12,6 +13,7 @@ interface LoginModalProps {
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToForgotPassword, currentLanguage }) => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -100,7 +102,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitc
           password: formData.password
         };
         await apiService.signup(userDetails);
-        toast.success('Account created successfully!', { position: 'top-center' });
+        // Auto-login after signup
+        await apiService.login({ email: formData.email, password: formData.password });
+        toast.success('Account created and logged in!', { position: 'top-center' });
         setTimeout(() => {
           onClose();
         }, 1500);
@@ -250,7 +254,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitc
                     <div className="text-sm">
                       <button
                         type="button"
-                        onClick={onSwitchToForgotPassword}
+                        onClick={() => {
+                          onClose();
+                          navigate('/forgot-password');
+                        }}
                         className="font-medium text-purple-400 hover:text-purple-300"
                       >
                         {t.forgotPassword}

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import apiService from '../api/apiService';
+import toast from 'react-hot-toast';
 import { X, Mail } from 'lucide-react';
 
 interface ForgotPasswordProps {
@@ -32,11 +34,33 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isOpen, onClose,
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Password reset requested for:', email);
-    // Here you would typically call an API to send the reset link
-    onClose();
+    setLoading(true);
+    try {
+      await apiService.requestPasswordReset(email);
+      toast.success(
+        currentLanguage === 'ur'
+          ? 'Password reset email bhej diya gaya hai.'
+          : 'Password reset email sent.',
+        { position: 'top-center' }
+      );
+      setEmail('');
+      setTimeout(() => {
+        onClose();
+      }, 1500);
+    } catch (err: any) {
+      toast.error(
+        currentLanguage === 'ur'
+          ? 'Kuch masla hua. Dobara koshish karein.'
+          : 'Something went wrong. Please try again.',
+        { position: 'top-center' }
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,9 +100,10 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isOpen, onClose,
 
                 <button
                   type="submit"
-                  className="w-full nv-glow-btn text-lg font-semibold py-3 rounded-xl transition-all duration-300"
+                  className="w-full nv-glow-btn text-lg font-semibold py-3 rounded-xl transition-all duration-300 disabled:opacity-60"
+                  disabled={loading}
                 >
-                  {t.sendLink}
+                  {loading ? (currentLanguage === 'ur' ? 'Bhej rahe hain...' : 'Sending...') : t.sendLink}
                 </button>
               </form>
               

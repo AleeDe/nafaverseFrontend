@@ -1,5 +1,4 @@
-
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { HomePage } from './pages/HomePage';
@@ -7,12 +6,15 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { Toaster } from 'react-hot-toast';
 import ResetPassword from './components/ResetPassword';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 
-function App() {
+import { useState, useRef } from 'react';
+
+const App: React.FC = () => {
+  const [activeView, setActiveView] = useState<'home' | 'about' | 'contact'>('home');
   const [currentLanguage, setCurrentLanguage] = useState<'en' | 'ur'>('en');
-  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
-  // Refs for scrolling
+  // Refs for HomePage scroll
   const heroRef = useRef<HTMLDivElement>(null);
   const journeyRef = useRef<HTMLDivElement>(null);
   const graphRef = useRef<HTMLDivElement>(null);
@@ -46,8 +48,8 @@ function App() {
         {/* Content Wrapper */}
         <div className="relative z-10">
           <Navigation
-            activeView={"home"}
-            onNavigate={() => {}}
+            activeView={activeView}
+            onNavigate={setActiveView}
             currentLanguage={currentLanguage}
             onLanguageToggle={() => setCurrentLanguage(prev => prev === 'en' ? 'ur' : 'en')}
             onScrollToSection={scrollToSection}
@@ -58,12 +60,13 @@ function App() {
               <Route path="/about" element={<AboutPage currentLanguage={currentLanguage} />} />
               <Route path="/contact" element={<ContactPage currentLanguage={currentLanguage} />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             </Routes>
           </main>
         </div>
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

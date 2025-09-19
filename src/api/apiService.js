@@ -30,9 +30,16 @@ class ApiService {
   // Login API call
   async login(credentials) {
     const response = await this.api.post('auth/login', credentials);
-    // Save token to localStorage if present
+    // Save token, username, and email in cookies (expires in 7 days)
     if (response.data && response.data.token) {
-      localStorage.setItem('token', response.data.token);
+      const maxAge = 60 * 60 * 24 * 7; // 7 days
+      document.cookie = `token=${response.data.token}; path=/; max-age=${maxAge}`;
+      if (response.data.username) {
+        document.cookie = `username=${encodeURIComponent(response.data.username)}; path=/; max-age=${maxAge}`;
+      }
+      if (response.data.email) {
+        document.cookie = `email=${encodeURIComponent(response.data.email)}; path=/; max-age=${maxAge}`;
+      }
     }
     return response.data;
   }
@@ -42,18 +49,21 @@ class ApiService {
     window.location.href = 'http://localhost:8080/api/google/login';
   }
 
-  // You can add more methods here (getUser, etc.)
-}
-
-// Add this utility to handle Google OAuth callback
-export function handleGoogleOAuthCallback() {
-  // Check for token in URL (e.g., /?token=...)
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get('token');
-  if (token) {
-    localStorage.setItem('token', token);
-    window.location.href = '/'; // Redirect to home page
+  // Request password reset
+  async requestPasswordReset(email) {
+    // Assuming backend endpoint: POST /password/request?email=...
+    const response = await this.api.post('password/request', null, { params: { email } });
+    return response.data;
   }
+
+  // Reset password
+  async resetPassword(token, newPassword) {
+    // Backend endpoint: POST /reset?token=...&newPassword=...
+    const response = await this.api.post('password/reset', null, { params: { token, newPassword } });
+    return response.data;
+  }
+
+  // You can add more methods here (getUser, etc.)
 }
 
 const apiService = new ApiService();

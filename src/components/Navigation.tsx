@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import {
@@ -28,6 +29,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   onLanguageToggle,
   onScrollToSection
 }) => {
+  const navigate = useNavigate();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -67,23 +69,16 @@ export const Navigation: React.FC<NavigationProps> = ({
   };
 
   const handleNavClick = (item: string) => {
-    if (activeView === 'home') {
-      if (item === 'home') {
-        onScrollToSection?.('hero');
-      } else if (item === 'features') {
-        onScrollToSection?.('journey');
-      } else {
-        onNavigate(item as 'home' | 'about' | 'contact');
-      }
-    } else {
-      if (item === 'home') {
-        onNavigate('home');
-      } else if (item === 'features') {
-        onNavigate('home');
-        setTimeout(() => onScrollToSection?.('journey'), 100);
-      } else {
-        onNavigate(item as 'home' | 'about' | 'contact');
-      }
+    if (item === 'home') {
+      navigate('/');
+      onScrollToSection?.('hero');
+    } else if (item === 'features') {
+      navigate('/');
+      setTimeout(() => onScrollToSection?.('journey'), 100);
+    } else if (item === 'about') {
+      navigate('/about');
+    } else if (item === 'contact') {
+      navigate('/contact');
     }
   };
 
