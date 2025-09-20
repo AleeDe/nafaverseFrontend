@@ -1,11 +1,10 @@
 import React from 'react';
 import { BookOpen, TrendingUp, Target } from 'lucide-react';
+import { useDashboard } from './DashboardContext';
 
-interface JourneySectionProps {
-  currentLanguage: 'en' | 'ur';
-}
+export const JourneySection = () => {
+  const { currentLanguage } = useDashboard();
 
-export const JourneySection: React.FC<JourneySectionProps> = ({ currentLanguage }) => {
   const content = {
     en: {
       title: 'Your Journey to Financial Freedom',

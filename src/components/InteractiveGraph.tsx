@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useDashboard } from './DashboardContext';
 
-interface InteractiveGraphProps {
-  currentLanguage: 'en' | 'ur';
-}
-
-export const InteractiveGraph: React.FC<InteractiveGraphProps> = ({ currentLanguage }) => {
+export const InteractiveGraph = () => {
+  const { currentLanguage } = useDashboard();
   const [selectedPeriod, setSelectedPeriod] = useState('1 Year');
 
   const content = {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import apiService from '../api/apiService';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { apiService } from '../api/apiService'; // Use named import
+import { Toaster, toast } from 'sonner';
 
-const ResetPassword: React.FC = () => {
+export const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -81,5 +81,3 @@ const ResetPassword: React.FC = () => {
     </div>
   );
 };
-
-export default ResetPassword;

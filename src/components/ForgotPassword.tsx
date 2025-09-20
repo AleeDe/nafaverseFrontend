@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
-import apiService from '../api/apiService';
-import toast from 'react-hot-toast';
+import { useState } from 'react';
+import { apiService } from '../api/apiService'; // Use named import
+import { useDashboard } from './DashboardContext';
+import { Toaster, toast } from 'sonner';
 import { X, Mail } from 'lucide-react';
 
-interface ForgotPasswordProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSwitchToLogin: () => void;
-  currentLanguage: 'en' | 'ur';
-}
-
-export const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isOpen, onClose, onSwitchToLogin, currentLanguage }) => {
+export const ForgotPassword = ({ isOpen, onClose, onSwitchToLogin }) => {
+  const { currentLanguage } = useDashboard();
   const [email, setEmail] = useState('');
 
   const content = {

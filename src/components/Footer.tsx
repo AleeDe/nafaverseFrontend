@@ -1,7 +1,10 @@
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { useDashboard } from './DashboardContext';
 
 export const Footer: React.FC = () => {
+  const { currentLanguage } = useDashboard();
+
   return (
     <footer className="bg-slate-950/80 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

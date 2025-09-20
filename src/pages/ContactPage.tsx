@@ -1,18 +1,34 @@
 import { Contact } from '../components/Contact';
 import { Footer } from '../components/Footer';
 import { ArrowUp } from 'lucide-react';
-
-interface ContactPageProps {
-  currentLanguage: 'en' | 'ur';
-}
+import { useDashboard } from '../components/DashboardContext';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-export function ContactPage({ currentLanguage }: ContactPageProps) {
+export function ContactPage() {
+  const { currentLanguage } = useDashboard();
+
+  const content = {
+    en: {
+      title: 'Contact Us',
+      description: 'Have questions? Reach out to us!'
+    },
+    ur: {
+      title: 'ہم سے رابطہ کریں',
+      description: 'کوئی سوال ہے؟ ہم سے رابطہ کریں!'
+    }
+  };
+
+  const t = content[currentLanguage];
+
   return (
     <>
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-4xl font-bold mb-4">{t.title}</h1>
+        <p className="text-lg">{t.description}</p>
+      </div>
       <Contact currentLanguage={currentLanguage} />
       <Footer />
       

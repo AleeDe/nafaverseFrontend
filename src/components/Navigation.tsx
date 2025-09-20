@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import {
@@ -13,22 +13,11 @@ import {
 import { LoginModal } from './LoginModal';
 import { NafaVerseLogo } from './NafaVerseLogo';
 import { ForgotPassword } from './ForgotPassword';
+import { useDashboard } from './DashboardContext';
 
-interface NavigationProps {
-  activeView: 'home' | 'about' | 'contact';
-  onNavigate: (view: 'home' | 'about' | 'contact') => void;
-  currentLanguage: 'en' | 'ur';
-  onLanguageToggle: () => void;
-  onScrollToSection?: (section: string) => void;
-}
-
-export const Navigation: React.FC<NavigationProps> = ({
-  activeView,
-  onNavigate,
-  currentLanguage,
-  onLanguageToggle,
-  onScrollToSection
-}) => {
+export const Navigation: React.FC = () => {
+  const { currentLanguage, setCurrentLanguage } = useDashboard();
+  const location = useLocation();
   const navigate = useNavigate();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
@@ -56,7 +45,7 @@ export const Navigation: React.FC<NavigationProps> = ({
     }
   } as const;
 
-  const t = content[currentLanguage];
+  const t = content[currentLanguage] || content.en;
 
   const openForgotPassword = () => {
     setIsLoginOpen(false);
@@ -82,6 +71,18 @@ export const Navigation: React.FC<NavigationProps> = ({
     }
   };
 
+  const handleLanguageToggle = () => {
+    setCurrentLanguage(currentLanguage === 'en' ? 'ur' : 'en');
+  };
+
+  // Example navigation items
+  const navItems = [
+    { label: t.home, path: '/' },
+    { label: t.features, path: '/features' },
+    { label: t.about, path: '/about' },
+    { label: t.contact, path: '/contact' }
+  ];
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black md:bg-black/20 md:backdrop-blur-md border-b border-white/10">
@@ -98,7 +99,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               <button
                 onClick={() => handleNavClick('home')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeView === 'home' ? 'text-[#00B8A9]' : 'text-white hover:text-[#00B8A9]'
+                  location.pathname === '/' ? 'text-[#00B8A9]' : 'text-white hover:text-[#00B8A9]'
                 }`}
               >
                 {t.home}
@@ -112,7 +113,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               <button
                 onClick={() => handleNavClick('about')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeView === 'about' ? 'text-[#00B8A9]' : 'text-white hover:text-[#00B8A9]'
+                  location.pathname === '/about' ? 'text-[#00B8A9]' : 'text-white hover:text-[#00B8A9]'
                 }`}
               >
                 {t.about}
@@ -120,7 +121,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               <button
                 onClick={() => handleNavClick('contact')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeView === 'contact' ? 'text-[#00B8A9]' : 'text-white hover:text-[#00B8A9]'
+                  location.pathname === '/contact' ? 'text-[#00B8A9]' : 'text-white hover:text-[#00B8A9]'
                 }`}
               >
                 {t.contact}
@@ -130,7 +131,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             {/* Right Side */}
             <div className="flex items-center space-x-4 min-w-0">
               <Button
-                onClick={onLanguageToggle}
+                onClick={handleLanguageToggle}
                 variant="ghost"
                 size="sm"
                 className="text-white hover:bg-white/10 border border-white/20"

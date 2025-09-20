@@ -1,11 +1,10 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import { useDashboard } from './DashboardContext';
 
-interface FinalCTAProps {
-  currentLanguage: 'en' | 'ur';
-}
+export const FinalCTA: React.FC = () => {
+  const { currentLanguage } = useDashboard();
 
-export const FinalCTA: React.FC<FinalCTAProps> = ({ currentLanguage }) => {
   const content = {
     en: {
       title: 'READY. SET. INVEST.',

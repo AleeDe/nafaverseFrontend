@@ -1,12 +1,11 @@
 import React from 'react';
 import { BookOpen, Gamepad2, Coins, ArrowRight, CheckCircle2, Clock3, Trophy, Play } from 'lucide-react';
 import { Button } from './ui/button';
+import { useDashboard } from './DashboardContext';
 
-interface InteractiveLearnPlayEarnProps {
-  currentLanguage: 'en' | 'ur';
-}
+export const InteractiveLearnPlayEarn = () => {
+  const { currentLanguage } = useDashboard();
 
-export const InteractiveLearnPlayEarn: React.FC<InteractiveLearnPlayEarnProps> = ({ currentLanguage }) => {
   const content = {
     en: {
       title: 'Learn. Play. Earn.',

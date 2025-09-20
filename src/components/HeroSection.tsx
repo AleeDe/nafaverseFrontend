@@ -2,12 +2,11 @@ import React from 'react';
 import { Sparkles, TrendingUp, Gauge, ShieldCheck, Gamepad2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
+import { useDashboard } from './DashboardContext';
 
-interface HeroSectionProps {
-  currentLanguage: 'en' | 'ur';
-}
+export const HeroSection = () => {
+  const { currentLanguage } = useDashboard();
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ currentLanguage }) => {
   const content = {
     en: {
       welcome: 'Welcome to NAFAVERSE',

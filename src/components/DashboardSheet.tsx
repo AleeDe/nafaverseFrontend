@@ -2,15 +2,11 @@ import React from 'react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from './ui/sheet';
 import { LogIn, Settings, TrendingUp, User, Sparkles } from 'lucide-react';
+import { useDashboard } from './DashboardContext';
 
-interface DashboardSheetProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  language?: 'en' | 'ur';
-  guest?: boolean;
-}
+export const DashboardSheet: React.FC = () => {
+  const { dashboardOpen, setDashboardOpen, currentLanguage } = useDashboard();
 
-export const DashboardSheet: React.FC<DashboardSheetProps> = ({ open, onOpenChange, language = 'en', guest = true }) => {
   const t = {
     en: {
       dashboard: 'Dashboard',
@@ -40,10 +36,10 @@ export const DashboardSheet: React.FC<DashboardSheetProps> = ({ open, onOpenChan
     }
   } as const;
 
-  const tt = t[language];
+  const tt = t[currentLanguage];
 
   return (
-    <Sheet open={open} onOpenChange={onOpenChange}>
+    <Sheet open={dashboardOpen} onOpenChange={setDashboardOpen}>
       <SheetContent side="left" className="w-80 bg-gradient-to-br from-[#1a1630] via-[#4B3F72] to-[#1b2b2a] border-[rgba(167,134,223,0.3)] p-0">
         <div className="flex flex-col h-full">
           <SheetHeader>
@@ -102,14 +98,12 @@ export const DashboardSheet: React.FC<DashboardSheetProps> = ({ open, onOpenChan
           </div>
 
           {/* Sticky bottom auth */}
-          {guest && (
-            <div className="p-4 border-t border-white/10 bg-black/20 backdrop-blur-sm">
-              <Button className="nv-glow-btn w-full h-12 rounded-xl">
-                <LogIn className="w-4 h-4 mr-2" /> {tt.login}
-              </Button>
-              <p className="text-[11px] text-purple-200/80 text-center mt-3 leading-snug">{tt.privacy}</p>
-            </div>
-          )}
+          <div className="p-4 border-t border-white/10 bg-black/20 backdrop-blur-sm">
+            <Button className="nv-glow-btn w-full h-12 rounded-xl">
+              <LogIn className="w-4 h-4 mr-2" /> {tt.login}
+            </Button>
+            <p className="text-[11px] text-purple-200/80 text-center mt-3 leading-snug">{tt.privacy}</p>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
